@@ -20,18 +20,32 @@ else
     echo "Working in $(pwd)"
 fi
 
-## declare an array variable
-declare -a arr=("storm" "blackwidow" "medusa")
+## declare an array of user names to create on vm
+declare -a arr=("storm" "jeangrey" "polaris" "captainmarvel" "quake" "mercury" "jessicajones" "arclight" "firestar" "rogue")
 ## now loop through the above array
 for u in "${arr[@]}"
 # Create users and generate random password. Run as root:
 do
-#u=`openssl rand -hex 2`;
-useradd $u;
-p=`openssl rand -hex 5`;
-echo $p | passwd $u;
-echo "$u", $p >> 'usersinfo.csv'
+    sudo useradd $u -m;
+    p=`openssl rand -hex 5`;
+    printf "$p\n$p" | sudo passwd $u;
+    echo "$u", $p >> 'usersinfo.csv'
+
+    # add user to sudoers
+    sudo adduser $u sudo
+
+    ## now create the env...
+    condapath=/home/$u/.conda/envs
+
+    if [ ! -d $condapath ]; then
+        sudo mkdir -p $condapath
+    fi
+
+    ## Update appropriate permissions
+    sudo chown -R ${u}:${u} ${condapath}
 done
+echo "Created users"
+
 
 ## now create the env...
 condapath=/home/$adminUser/.conda/envs
@@ -42,7 +56,7 @@ fi
 
 #### PYTORCH 1.0 ####
 
-/anaconda/envs/py35/bin/conda create --name pytorch10 ipykernel conda
+/anaconda/envs/py35/bin/conda create --name pytorch10 python=3.6 ipykernel conda
 
 ## update appropriate permissions
 chown -R ${adminUser}:${adminUser} ${condapath}
@@ -56,12 +70,13 @@ unzip libtorch-shared-with-deps-latest.zip
 sudo mv libtorch /usr/local/lib/python3.5/dist-packages/torch
 
 ## Install it as a kernel
-/anaconda/envs/pytorch10/bin/python -m ipykernel install --name pytorch_preview --display-name "Python 3.5 - PyTorch 1.0"
+/anaconda/envs/pytorch10/bin/python -m ipykernel install --name pytorch_preview --display-name "Python 3.6 - PyTorch latest"
 
+echo "Done setting up PyTorch latest"
 
 #### PYTORCH 0.4.1 ####
 
-/anaconda/envs/py35/bin/conda create --name pytorch041 ipykernel conda numpy pyyaml scipy ipython mkl
+/anaconda/envs/py35/bin/conda create --name pytorch041 python=3.6 ipykernel conda numpy pyyaml scipy ipython mkl
 
 ## update appropriate permissions
 chown -R ${adminUser}:${adminUser} ${condapath}
@@ -71,12 +86,13 @@ chown -R ${adminUser}:${adminUser} ${condapath}
 /anaconda/envs/pytorch041/bin/conda install torchvision pytorch==0.4.1 -c pytorch
 
 ## Install it as a kernel
-/anaconda/envs/pytorch041/bin/python -m ipykernel install --name pytorch_041 --display-name "Python 3.5 - PyTorch 0.4.1"
+/anaconda/envs/pytorch041/bin/python -m ipykernel install --name pytorch_041 --display-name "Python 3.6 - PyTorch 0.4.1"
 
+echo "Done setting up PyTorch 0.4.1"
 
 #### PYTORCH 0.3.1 ####
 
-/anaconda/envs/py35/bin/conda create --name pytorch031 ipykernel conda numpy pyyaml scipy ipython mkl
+/anaconda/envs/py35/bin/conda create --name pytorch031 python=3.6 ipykernel conda numpy pyyaml scipy ipython mkl
 
 ## update appropriate permissions
 chown -R ${adminUser}:${adminUser} ${condapath}
@@ -86,7 +102,9 @@ chown -R ${adminUser}:${adminUser} ${condapath}
 /anaconda/envs/pytorch031/bin/conda install torchvision pytorch==0.3.1 -c pytorch
 
 ## Install it as a kernel
-/anaconda/envs/pytorch031/bin/python -m ipykernel install --name pytorch_031 --display-name "Python 3.5 - PyTorch 0.3.1"
+/anaconda/envs/pytorch031/bin/python -m ipykernel install --name pytorch_031 --display-name "Python 3.6 - PyTorch 0.3.1"
+
+echo "Done setting up PyTorch 0.3.1"
 
 ## Update appropriate permissions
 chown -R ${adminUser}:${adminUser} ${condapath}

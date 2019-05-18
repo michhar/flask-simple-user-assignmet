@@ -38,7 +38,7 @@ print("Beginning the deployment... \n\n")
 # Deploy the template
 my_deployment = deployer.deploy()
 
-print("Done deploying!!\n\nYou can connect via: `ssh {}@{}.westus.cloudapp.azure.com`".format(
+print("Done deploying!!\n\nYou can connect via: `ssh {}@{}.westus2.cloudapp.azure.com`".format(
     my_admin_user, deployer.dns_label_prefix))
 
 # Destroy the resource group which contains the deployment
