@@ -171,33 +171,7 @@
               "storageUri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName')), variables('apiVersion')).primaryEndpoints.blob)]"
             }
           }
-        },
-        "resources": [
-          {
-            "apiVersion": "2016-04-30-preview",
-            "type": "extensions",
-            "name": "multiple-users-dsvm",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-              "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
-            ],
-            "tags": {
-              "displayName": "multiple-users-dsvm"
-            },
-            "properties": {
-                "publisher": "Microsoft.Azure.Extensions",
-                "type": "CustomScript",
-                "typeHandlerVersion": "2.0",
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "fileUris": [
-                      "[variables('scriptUri')]"
-                    ],
-                    "commandToExecute": "[concat('./pytorch-dsvm-setup.sh ', parameters('adminUsername'))]"                
-                  }
-            }
-          }
-        ]
+        }
       }
     ]
   }
