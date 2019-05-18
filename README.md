@@ -16,6 +16,9 @@ Contributions to the sample are welcome.  Feel free to submit an issue or PR.
 ## Additional details
 
 * This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-* For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+* For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
+
+
+* Passwords for the VMs must have 3 of the following: 1 lower case character, 1 upper case character, 1 number, and 1 special character that is not '\' or '-'.
 
 

@@ -22,7 +22,11 @@ my_admin_user = os.getenv('VM_USER', 'superwoman') # admin name
 print('Take note of the admin user: ', my_admin_user)
 # Create a random password with Haikunator
 passwd_generator = Haikunator()
-passwd = passwd_generator.haikunate() 
+passwd = passwd_generator.haikunate()
+# Fix haikunate password for Azure-friendly
+passwd_list = list(passwd)
+passwd = ''.join([passwd_list[i].upper() if i == 0 else \
+    passwd_list[i] for i in range(len(passwd_list))]).replace('-', '_')
 my_user_password = os.getenv('VM_PASSWORD', passwd)
 print('Take note of the admin password: ', my_user_password)
 

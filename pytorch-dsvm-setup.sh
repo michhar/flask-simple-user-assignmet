@@ -21,15 +21,15 @@ else
 fi
 
 ## declare an array of user names to create on vm
-declare -a arr=("storm" "jeangrey" "polaris" "captainmarvel" "quake" "mercury" "jessicajones" "arclight" "firestar" "rogue")
+declare -a arr=("storm" "jeangrey" "polaris" "captainmarvel" "quake" "spidergwen" "jessicajones" "arclight" "firestar" "rogue")
 ## now loop through the above array
 for u in "${arr[@]}"
 # Create users and generate random password. Run as root:
 do
-    sudo useradd $u -m;
+    sudo useradd -m $u;
     p=`openssl rand -hex 5`;
     printf "$p\n$p" | sudo passwd $u;
-    echo "$u", $p >> 'usersinfo.csv'
+    echo $u, $p >> "/home/$adminUser/usersinfo.csv"
 
     # add user to sudoers
     sudo adduser $u sudo

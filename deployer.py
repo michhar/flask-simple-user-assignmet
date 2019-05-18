@@ -28,6 +28,7 @@ class Deployer(object):
         self.subscription_id = subscription_id
         self.resource_group = resource_group
         self.dns_label_prefix = self.name_generator.haikunate()
+        self.vm_name = self.name_generator.haikunate()
 
         self.my_admin_user = my_admin_user
         self.my_user_password = my_user_password
@@ -59,7 +60,7 @@ class Deployer(object):
         parameters = {
             'adminUsername': self.my_admin_user,
             'adminPassword': self.my_user_password,
-            'vmName': 'azure-deployment-sample-vm',
+            'vmName': self.vm_name,
             'dnsLabelPrefix': self.dns_label_prefix,
             'vmSize': 'Standard_NC6'
         }
