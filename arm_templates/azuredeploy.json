@@ -53,7 +53,7 @@
       "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
       "subnet1Ref": "[concat(variables('vnetID'),'/subnets/',variables('subnet1Name'))]",
       "apiVersion": "2015-06-15",
-      "scriptUri": "https://raw.githubusercontent.com/michhar/flask-simple-user-assignment/master/dsvm_deploy/pytorch-dsvm-setup.sh"
+      "scriptUri": "https://raw.githubusercontent.com/michhar/workshop-dsvm-and-webapp/master/dsvm_deploy/pytorch-dsvm-setup.sh"
     },
     "resources": [
       {
@@ -193,7 +193,7 @@
                     "fileUris": [
                       "[variables('scriptUri')]"
                     ],
-                    "commandToExecute": "[concat('./pytorch-dsvm-setup.sh ', parameters('adminUsername'), parameters('dnsLabelPrefix'))]"                
+                    "commandToExecute": "[concat('./pytorch-dsvm-setup.sh ', parameters('adminUsername'), parameters('dnsLabelPrefix'))]"              
                   }
             }
           }

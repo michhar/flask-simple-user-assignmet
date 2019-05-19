@@ -49,8 +49,7 @@ print("Done deploying!!\n\nYou can connect via: `ssh {}@{}.westus2.cloudapp.azur
     my_admin_user, deployer.dns_label_prefix))
 
 # SCP users and passwords file
-server = "{}@{}.westus2.cloudapp.azure.com".format(
-    my_admin_user, deployer.dns_label_prefix)
+server = "{}.westus2.cloudapp.azure.com".format(deployer.dns_label_prefix)
 scper = SCPFiles(server, 22, my_admin_user, my_user_password)
 scper.get_file(file_path='/home/{}/usersinfo.csv'.format(my_admin_user), download_path='.')
 

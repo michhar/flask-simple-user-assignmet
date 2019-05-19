@@ -1,18 +1,41 @@
 # A Web App for Distributing Logins to JupyterHub Running on an Azure VM
 
-This will have two parts:  1) Deploying a multi-user Azure Data Science Virtual Machine (DSVM) with Ubuntu 2) Setting up a web app based on Flask for handing out user logins to a VM with Jupyterhub.  The final product is handy for workshops where Jupyter and a custom setup is needed.
+This project is a WIP.  This will have two parts:  
+
+1) Deploying a multi-user Azure Data Science Virtual Machine (DSVM) with Ubuntu 
+
+2) Setting up a web app based on Flask for handing out user logins to a VM with Jupyterhub.  The final product is handy for workshops where Jupyter and a custom setup is needed.
+
+## What gets deployed
+
+* NC6 Ubuntu Data Science Virtual Machine with JupyterHub and PyTorch kernels
+* Azure App Service for Flask webapp
+* AAD App with a Service Principal
+
+## Prerequisites
+
+* These <a href="https://code.visualstudio.com/docs/python/tutorial-deploy-app-service-on-linux#_prerequisites" target="_blank">Prerequisites for Deploy to Azure App Service on Linux tutorial</a> which includes Python 3 (tested with 3.6) and an account on Azure - see link for complete list
+* Git
 
 ## Deploying a multi-user Ubuntu DSVM
 
-Create a virtual environment.
+Clone this repository in Git bash or bash terminal:
 
-    python -m venv .env
+    git clone https://github.com/michhar/workshop-dsvm-and-webapp.git
 
-Activate it.
+Open up VS Code to the repository folder.
+
+Go to **Terminal -> New Terminal** to open up a terminal window.
+
+Create a virtual environment (assuming Python 3.6 is installed):
+
+    python3.6 -m venv .env
+
+Activate it:
 
     .env/bin/activate
 
-Install Python packages.
+Install Python packages:
 
     pip install -r requirements.txt
 
@@ -22,6 +45,8 @@ Create an AAD app and Service Principal in Azure Portal for authentication.
 
 Create a file `.vars` and place environment variables inside it.
 
+* For example, the Unix file will look like:
+
 ```
 export AZURE_TENANT_ID=<tenant or directory id>
 export AZURE_CLIENT_ID=<client or app id>
@@ -30,13 +55,25 @@ export AZURE_SUBSCRIPTION_ID=<Azure subscription id>
 export VM_USER=wonderwoman
 ```
 
-Set the variables in the shell.
+* The Windows file will look like:
+
+```
+set AZURE_TENANT_ID <tenant or directory id>
+set AZURE_CLIENT_ID <client or app id>
+set AZURE_CLIENT_SECRET <app secret key>
+set AZURE_SUBSCRIPTION_ID <Azure subscription id>
+set VM_USER wonderwoman
+```
+
+Set the variables in the shell in Unix as follows (in Windows take away the `source` command):
 
     source .vars
 
-Run the deployment script.
+Run the deployment script:
 
     .env/bin/python dsvm_deploy/azure_deployment.py
+
+**IMPORTANT NOTE:** Make sure to "Stop" the VM when not in use to avoid incurring charges for it.  This can be done in the Azure Portal
 
 ## Setting up a web app based on Flask
 
@@ -67,8 +104,6 @@ Contributions to the sample are welcome.  Feel free to submit an issue or PR.
 
 * This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 * For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
-
-
 * Passwords for the VMs must have 3 of the following: 1 lower case character, 1 upper case character, 1 number, and 1 special character that is not '\' or '-'.
 
 
