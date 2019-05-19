@@ -34,7 +34,7 @@ export VM_USER=wonderwoman
 
 Run the deployment script.
 
-    python dsvm_deploy/azure_deployment.py
+    .env/bin/python dsvm_deploy/azure_deployment.py
 
 ## Setting up a web app based on Flask
 
