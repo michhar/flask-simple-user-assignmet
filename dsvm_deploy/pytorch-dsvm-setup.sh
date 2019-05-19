@@ -7,7 +7,7 @@
 # comments below:
 
 adminUser=$1
-# dnsPrefix=$2
+dnsPrefix=$2
 
 WD=/home/$adminUser/notebooks
 
@@ -22,7 +22,7 @@ else
 fi
 
 # Save host dns name to the users text file
-# echo $dnsPrefix >> "/home/$adminUser/usersinfo.csv";
+echo $dnsPrefix >> "/home/$adminUser/usersinfo.csv";
 
 ## declare an array of user names to create on vm
 declare -a arr=("storm" "jeangrey" "polaris" "captainmarvel" "quake" "spidergwen" "jessicajones" "arclight" "firestar" "rogue")

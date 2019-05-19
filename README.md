@@ -2,7 +2,7 @@
 
 This project is a WIP.  This will have two parts:  
 
-1) Deploying a multi-user Azure Data Science Virtual Machine (DSVM) with Ubuntu 
+1) Programmatically deploy a multi-user Azure Data Science Virtual Machine (DSVM) with Ubuntu 
 
 2) Setting up a web app based on Flask for handing out user logins to a VM with Jupyterhub.  The final product is handy for workshops where Jupyter and a custom setup is needed.
 
