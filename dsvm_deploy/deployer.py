@@ -53,7 +53,7 @@ class Deployer(object):
         except CloudError as err:
             print(err, ' and moving on.')
 
-        template_path = os.path.join(os.path.dirname(__file__), 'arm_templates', 'azuredeploy.json')
+        template_path = os.path.join(os.path.dirname(__file__), '..', 'arm_templates', 'azuredeploy.json')
         with open(template_path, 'r') as template_file_fd:
             template = json.load(template_file_fd)
 
