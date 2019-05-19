@@ -28,7 +28,7 @@ class Deployer(object):
         self.subscription_id = subscription_id
         self.resource_group = resource_group
         self.dns_label_prefix = self.name_generator.haikunate()
-        self.vm_name = self.name_generator.haikunate()
+        self.vm_name = self.dns_label_prefix
 
         self.my_admin_user = my_admin_user
         self.my_user_password = my_user_password
