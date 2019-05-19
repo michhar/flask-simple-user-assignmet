@@ -6,3 +6,6 @@ MarkupSafe==1.0
 Werkzeug==0.14.1
 azure-mgmt-resource==2.1.0
 haikunator==2.1.0
+gunicorn==19.9.0
+paramiko==2.4.2
+scp==0.13.2

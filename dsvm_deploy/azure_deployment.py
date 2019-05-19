@@ -5,6 +5,7 @@ Based upon:  https://github.com/Azure-Samples/resource-manager-python-template-d
 
 import os.path
 from deployer import Deployer
+from scp_files import SCPFiles
 from haikunator import Haikunator
 
 
@@ -46,6 +47,12 @@ my_deployment = deployer.deploy()
 
 print("Done deploying!!\n\nYou can connect via: `ssh {}@{}.westus2.cloudapp.azure.com`".format(
     my_admin_user, deployer.dns_label_prefix))
+
+# SCP users and passwords file
+server = "{}@{}.westus2.cloudapp.azure.com".format(
+    my_admin_user, deployer.dns_label_prefix)
+scper = SCPFiles(server, 22, my_admin_user, my_user_password)
+scper.get_file(file_path='/home/{}/usersinfo.csv'.format(my_admin_user), download_path='.')
 
 # Destroy the resource group which contains the deployment
 # deployer.destroy()

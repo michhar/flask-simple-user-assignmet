@@ -40,9 +40,18 @@ Run the deployment script.
 
 ## Setting up a web app based on Flask
 
-Info on its way.  Here's a snippet of info.
+### Steps
 
-The `startup.py` file, for its part, is specifically for deploying to Azure App Service on Linux without containers. Because the app code is in its own *module* in the `login_app` folder (which has an `__init__.py`), trying to start the Gunicorn server within App Service on Linux produces an "Attempted relative import in non-package" error. The `startup.py` file, therefore, is just a shim to import the app object from the `login_app` module, which then allows you to use startup:app in the Gunicorn command line (see `startup.txt`).
+When first getting to this repository, test locally.
+
+    gunicorn --bind=0.0.0.0 --timeout 600 startup:app
+
+* Navigate to the indicated URL to see the web app in action (`flask run` could also be used for testing, but since `gunicorn` is used by App Service, it's nice to test it that way).
+
+
+### Purpose of files
+
+The `startup.py` file, for its part, is specifically for deploying to Azure App Service on Linux without containers. Because the app code is in its own *module* in the `login_app` folder (which has an `__init__.py`), trying to start the Gunicorn server within App Service on Linux produces an "Attempted relative import in non-package" error. The `startup.py` file, therefore, is just a shim to import the app object from the `login_app` module, which then allows you to use startup:app in the Gunicorn command line (see `startup.txt`).  As the tutorial indicates under <a href="https://code.visualstudio.com/docs/python/tutorial-deploy-app-service-on-linux#_configure-a-custom-startup-file" target="_blank">Configure a custom startup file</a>, the `startup.txt` will need to be placed in the App Service's **Configuration -> General settings -> Starup Command** (just go to the App Service in the Azure Portal to do this).
 
 ## References
 

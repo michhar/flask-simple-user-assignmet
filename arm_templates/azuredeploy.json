@@ -193,7 +193,7 @@
                     "fileUris": [
                       "[variables('scriptUri')]"
                     ],
-                    "commandToExecute": "[concat('./pytorch-dsvm-setup.sh ', parameters('adminUsername'))]"                
+                    "commandToExecute": "[concat('./pytorch-dsvm-setup.sh ', parameters('adminUsername'), parameters('dnsLabelPrefix'))]"                
                   }
             }
           }
