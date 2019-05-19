@@ -1,4 +1,4 @@
-# Python/Flask sample for generating DSVM logins
+# A Web App for Distributing Logins to JupyterHub Running on an Azure VM
 
 This will have two parts:  1) Deploying a multi-user Azure Data Science Virtual Machine (DSVM) with Ubuntu 2) Setting up a web app based on Flask for handing out user logins to a VM with Jupyterhub.  The final product is handy for workshops where Jupyter and a custom setup is needed.
 
@@ -16,9 +16,11 @@ Install Python packages.
 
     pip install -r requirements.txt
 
-Set the environment variables in the current bash shell.
+Create an AAD app and Service Principal in Azure Portal for authentication.
 
-* Create a file `.vars` and place variables inside it.
+* Follow [How to: Use the portal to create an Azure AD application and service principal that can access resources](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
+
+Create a file `.vars` and place environment variables inside it.
 
 ```
 export AZURE_TENANT_ID=<tenant or directory id>
@@ -28,7 +30,7 @@ export AZURE_SUBSCRIPTION_ID=<Azure subscription id>
 export VM_USER=wonderwoman
 ```
 
-* Then set all variables in the shell.
+Set the variables in the shell.
 
     source .vars
 
