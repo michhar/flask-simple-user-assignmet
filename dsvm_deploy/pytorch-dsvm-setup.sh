@@ -9,8 +9,8 @@
 # Input args
 adminUser=$1
 echo $adminUser >> "/home/userscript.log"
-dnsPrefix=$2
-echo $dnsPrefix >> "/home/userscript.log"
+publicIP=`dig +short myip.opendns.com @resolver1.opendns.com`
+echo $publicIP >> "/home/userscript.log"
 
 WD=/home/$adminUser/notebooks
 
@@ -24,8 +24,8 @@ else
     echo "Working in $(pwd)" >> "/home/userscript.log"
 fi
 
-# Save host dns name to the users text file
-echo $dnsPrefix >> "/home/$adminUser/usersinfo.csv"
+# Save host public ip address to the users text file
+echo $publicIP >> "/home/$adminUser/usersinfo.csv"
 
 ## declare an array of user names to create on vm
 declare -a arr=("storm" "jeangrey" "polaris" "captainmarvel" "quake" "spidergwen" "jessicajones" "arclight" "firestar" "rogue")
