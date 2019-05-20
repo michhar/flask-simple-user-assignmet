@@ -28,9 +28,8 @@ print('Take note of the admin user: ', my_admin_user)
 passwd = funny_generator.haikunate()
 # Fix haikunate password for Azure-friendly
 passwd_list = list(passwd)
-passwd = ''.join([passwd_list[i].upper() if i == 0 else \
+my_user_password = ''.join([passwd_list[i].upper() if i == 0 else \
     passwd_list[i] for i in range(len(passwd_list))]).replace('-', '_')
-my_user_password = os.getenv('VM_PASSWORD', passwd)
 print('Take note of the admin password: ', my_user_password)
 
 msg = "\nInitializing the Deployer class with subscription id: {}, resource group: {}" \

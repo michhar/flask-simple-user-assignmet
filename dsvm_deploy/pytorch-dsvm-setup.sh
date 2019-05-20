@@ -17,7 +17,7 @@ WD=/home/$adminUser/notebooks
 echo WD is $WD
 
 if [ ! -d $WD ]; then
-    echo $WD does not exist - aborting!!
+    echo $WD "does not exist - aborting!!" >> "/home/userscript.log"
     exit
 else
     cd $WD
@@ -28,7 +28,7 @@ fi
 echo $publicIP >> "/home/$adminUser/usersinfo.csv"
 
 ## declare an array of user names to create on vm
-declare -a arr=("storm" "jeangrey" "polaris" "captainmarvel" "quake" "spidergwen" "jessicajones" "arclight" "firestar" "rogue")
+declare -a arr=("temp" "storm" "jeangrey" "polaris" "captainmarvel" "quake" "spidergwen" "jessicajones" "arclight" "firestar" "rogue")
 ## now loop through the above array
 for u in "${arr[@]}";
 # Create users and generate random password. Run as root:
