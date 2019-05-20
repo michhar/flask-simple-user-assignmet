@@ -27,6 +27,7 @@ class Deployer(object):
     def __init__(self, subscription_id, resource_group, my_admin_user, my_user_password):
         self.subscription_id = subscription_id
         self.resource_group = resource_group
+        self.deployment_name = self.name_generator.haikunate()
         self.dns_label_prefix = self.name_generator.haikunate()
         self.vm_name = self.dns_label_prefix
 
@@ -74,7 +75,7 @@ class Deployer(object):
 
         deployment_async_operation = self.client.deployments.create_or_update(
             self.resource_group,
-            'azure-sample',
+            self.deployment_name,
             deployment_properties
         )
         deployment_async_operation.wait()
