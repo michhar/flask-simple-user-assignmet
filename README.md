@@ -2,13 +2,15 @@
 
 This project is a WIP.  This will have two parts:  
 
-1) Programmatically deploy a multi-user Azure Data Science Virtual Machine (DSVM) with Ubuntu 
+1) Programmatically deploy a multi-user <a href="https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/" target="_blank">Azure Data Science Virtual Machine (DSVM)</a> with Ubuntu for working with PyTorch and other deep learning frameworks through Jupyter
 
-2) Setting up a web app based on Flask for handing out user logins to a VM with Jupyterhub.  The final product is handy for workshops where Jupyter and a custom setup is needed.
+2) Setting up a web app based on Flask for handing out user logins to a VM with <a href="https://jupyterhub.readthedocs.io/en/stable/" target="_blank">JupyterHub</a>
+
+The final product is handy for workshops where Jupyter and a multi-user setup is needed.
 
 ## What gets deployed
 
-* NC6 Ubuntu Data Science Virtual Machine with JupyterHub and PyTorch kernels
+* NC6 Ubuntu Data Science Virtual Machine with JupyterHub and <a href="https://pytorch.org/" target="_blank">PyTorch</a> kernels (1, 0.4.1, 0.3.1)
 * Azure App Service for Flask webapp
 * AAD App with a Service Principal
 
@@ -18,6 +20,17 @@ This project is a WIP.  This will have two parts:
 * Git
 
 ## Deploying a multi-user Ubuntu DSVM
+
+But first, here are some more details on the VM.
+
+* Multiple users are created
+  * 1 admin ("superwoman" is the default name or otherwise provided in the `VM_USER` environment var) and 10 users with sudoer permissions (so that they can `pip` install)
+  * The admin and users have randomly generated passwords.  The admin password is given when running the Python deployment script.  The list for the additional users and corresponding passwords is downloaded automatically as a `csv` file after running the deployment script.
+  * Each user will have a home folder with the generic notebooks that come with the VM by default - so essentially their own working environment.
+* JupyterHub is provided for multi-tenant login
+* PyTorch 1.0, 0.4.1, and 0.3.1 kernels for Jupyter are created
+
+### Steps
 
 Clone this repository in Git bash or bash terminal:
 
@@ -77,6 +90,8 @@ Run the deployment script:
 
 ## Setting up a web app based on Flask
 
+This is currently being implemented.  It will be based on this <a href="https://code.visualstudio.com/docs/python/tutorial-deploy-app-service-on-linux" target="_blank">Tutorial</a>.
+
 ### Steps
 
 When first getting to this repository, test locally.
@@ -104,6 +119,13 @@ Contributions to the sample are welcome.  Feel free to submit an issue or PR.
 
 * This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 * For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
+
+
+## Troubleshooting
+
 * Passwords for the VMs must have 3 of the following: 1 lower case character, 1 upper case character, 1 number, and 1 special character that is not '\' or '-'.
+* To check for the user accounts present on the VM, ssh into the VM, and use the following command:
+
+    * `cut -d: -f1 /etc/passwd`
 
 

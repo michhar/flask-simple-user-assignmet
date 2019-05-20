@@ -21,7 +21,7 @@ from haikunator import Haikunator
 funny_generator = Haikunator()
 
 my_subscription_id = os.getenv('AZURE_SUBSCRIPTION_ID')   # your Azure Subscription Id
-my_resource_group = funny_generator.haikunate() + '-wsrg'         # the resource group for deployment
+my_resource_group = 'resources-' + funny_generator.haikunate()         # the resource group for deployment
 my_admin_user = os.getenv('VM_USER', 'superwoman') # admin name
 print('Take note of the admin user: ', my_admin_user)
 # Create a random password with Haikunator
