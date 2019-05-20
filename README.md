@@ -1,6 +1,6 @@
 # A Web App for Distributing Logins to JupyterHub Running on an Azure VM
 
-This project is a WIP.  This will have two parts:  
+This project is a WIP.  It will have two parts:  
 
 1) Programmatically deploy a multi-user <a href="https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/" target="_blank">Azure Data Science Virtual Machine (DSVM)</a> with Ubuntu for working with PyTorch and other deep learning frameworks through Jupyter
 
@@ -123,6 +123,8 @@ Contributions to the sample are welcome.  Feel free to submit an issue or PR.
 
 ## Troubleshooting
 
+* The `CryptographyDeprecationWarning` is a known issue.
+* Occasionally, the VM has an issue with deployment and an scp error will show up (`paramiko.ssh_exception.NoValidConnectionsError`).  In this case, please delete the resource group in the Azure Portal and try the deployment agin.
 * Passwords for the VMs must have 3 of the following: 1 lower case character, 1 upper case character, 1 number, and 1 special character that is not '\' or '-'.
 * To check for the user accounts present on the VM, ssh into the VM, and use the following command:
 
