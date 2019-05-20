@@ -6,8 +6,11 @@
 # see abbreviated notes in README.md
 # comments below:
 
+# Input args
 adminUser=$1
+echo $adminUser >> "/home/userscript.log"
 dnsPrefix=$2
+echo $dnsPrefix >> "/home/userscript.log"
 
 WD=/home/$adminUser/notebooks
 
@@ -18,21 +21,21 @@ if [ ! -d $WD ]; then
     exit
 else
     cd $WD
-    echo "Working in $(pwd)"
+    echo "Working in $(pwd)" >> "/home/userscript.log"
 fi
 
 # Save host dns name to the users text file
-echo $dnsPrefix >> "/home/$adminUser/usersinfo.csv";
+echo $dnsPrefix >> "/home/$adminUser/usersinfo.csv"
 
 ## declare an array of user names to create on vm
 declare -a arr=("storm" "jeangrey" "polaris" "captainmarvel" "quake" "spidergwen" "jessicajones" "arclight" "firestar" "rogue")
 ## now loop through the above array
-for u in "${arr[@]}"
+for u in "${arr[@]}";
 # Create users and generate random password. Run as root:
 do
-    sudo useradd -m $u;
-    p=`openssl rand -hex 5`;
-    printf "$p\n$p" | sudo passwd $u;
+    sudo useradd -m $u
+    p=`openssl rand -hex 5`
+    printf "$p\n$p" | sudo passwd $u
     echo $u, $p >> "/home/$adminUser/usersinfo.csv"
 
     # add user to sudoers
@@ -48,7 +51,7 @@ do
     ## Update appropriate permissions
     sudo chown -R ${u}:${u} ${condapath}
 done
-echo "Created users"
+echo "Created users" >> "/home/userscript.log"
 
 
 
@@ -77,7 +80,7 @@ sudo mv libtorch /usr/local/lib/python3.5/dist-packages/torch
 ## Install it as a kernel
 /anaconda/envs/pytorch10/bin/python -m ipykernel install --name pytorch_preview --display-name "Python 3.6 - PyTorch latest"
 
-echo "Done setting up PyTorch latest"
+echo "Done setting up PyTorch latest" >> "/home/userscript.log"
 
 #### PYTORCH 0.4.1 ####
 
@@ -93,7 +96,7 @@ chown -R ${adminUser}:${adminUser} ${condapath}
 ## Install it as a kernel
 /anaconda/envs/pytorch041/bin/python -m ipykernel install --name pytorch_041 --display-name "Python 3.6 - PyTorch 0.4.1"
 
-echo "Done setting up PyTorch 0.4.1"
+echo "Done setting up PyTorch 0.4.1" >> "/home/userscript.log"
 
 #### PYTORCH 0.3.1 ####
 
@@ -109,7 +112,7 @@ chown -R ${adminUser}:${adminUser} ${condapath}
 ## Install it as a kernel
 /anaconda/envs/pytorch031/bin/python -m ipykernel install --name pytorch_031 --display-name "Python 3.6 - PyTorch 0.3.1"
 
-echo "Done setting up PyTorch 0.3.1"
+echo "Done setting up PyTorch 0.3.1" >> "/home/userscript.log"
 
 ## Update appropriate permissions
 chown -R ${adminUser}:${adminUser} ${condapath}
@@ -117,4 +120,4 @@ chown -R ${adminUser}:${adminUser} ${condapath}
 ## Reboot jupyterhub
 systemctl restart jupyterhub
 
-echo "Done!"
+echo "Done!" >> "/home/userscript.log"
