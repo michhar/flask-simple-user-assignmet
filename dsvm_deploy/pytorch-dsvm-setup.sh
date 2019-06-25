@@ -14,6 +14,9 @@ echo $publicIP >> "/home/userscript.log"
 
 WD=/home/$adminUser/notebooks
 
+# Clone the content into admin user notebooks directory
+git clone https://github.com/PythonWorkshop/intro-to-nlp-with-pytorch.git "$WD/intro-to-nlp-with-pytorch"
+
 echo WD is $WD
 
 if [ ! -d $WD ]; then
@@ -31,10 +34,11 @@ echo $publicIP >> "/home/$adminUser/usersinfo.csv"
 declare -a arr=("temp" "storm" "jeangrey" "polaris" "captainmarvel" "quake" "spidergwen" "jessicajones" "arclight" "firestar" "rogue")
 ## now loop through the above array
 for u in "${arr[@]}";
-# Create users and generate random password. Run as root:
+# Create users and generate random password with uppercase and punc chars. Run as root:
 do
     sudo useradd -m $u
-    p=`openssl rand -hex 5`
+    p=`openssl rand -hex 4`
+    p="P$p!"
     printf "$p\n$p" | sudo passwd $u
     echo $u, $p >> "/home/$adminUser/usersinfo.csv"
 
@@ -62,7 +66,7 @@ if [ ! -d $condapath ]; then
     mkdir -p $condapath
 fi
 
-#### PYTORCH 1.0 ####
+#### PYTORCH 1.1 ####
 
 /anaconda/envs/py35/bin/conda create --name pytorch1 python=3.6 ipykernel conda
 
