@@ -64,13 +64,13 @@ fi
 
 #### PYTORCH 1.0 ####
 
-/anaconda/envs/py35/bin/conda create --name pytorch10 python=3.6 ipykernel conda
+/anaconda/envs/py35/bin/conda create --name pytorch1 python=3.6 ipykernel conda
 
 ## update appropriate permissions
 chown -R ${adminUser}:${adminUser} ${condapath}
 
-# Install PyTorch 1.0 into environment with cuda 9.2 support as DSVM is on this now
-/anaconda/envs/pytorch10/bin/python -m conda install pytorch torchvision cudatoolkit=9.2 -c pytorch -y
+# Install PyTorch 1.x into environment with cuda 9.2 support as DSVM is on this now
+/anaconda/envs/pytorch1/bin/python -m conda install pytorch==1.1 torchvision cudatoolkit=9.2 -c pytorch -y
 
 # LibTorch - install into /usr/local/lib
 wget https://download.pytorch.org/libtorch/nightly/cu92/libtorch-shared-with-deps-latest.zip
@@ -78,41 +78,9 @@ unzip libtorch-shared-with-deps-latest.zip
 sudo mv libtorch /usr/local/lib/python3.5/dist-packages/torch
 
 ## Install it as a kernel
-/anaconda/envs/pytorch10/bin/python -m ipykernel install --name pytorch_preview --display-name "Python 3.6 - PyTorch latest"
+/anaconda/envs/pytorch1/bin/python -m ipykernel install --name pytorch_preview --display-name "Python 3.6 - PyTorch 1.1"
 
-echo "Done setting up PyTorch latest" >> "/home/userscript.log"
-
-#### PYTORCH 0.4.1 ####
-
-/anaconda/envs/py35/bin/conda create --name pytorch041 python=3.6 ipykernel conda numpy pyyaml scipy ipython mkl
-
-## update appropriate permissions
-chown -R ${adminUser}:${adminUser} ${condapath}
-
-# # Install PyTorch 0.4.1 into environment with cuda 9.2 support as DSVM is on this now
-/anaconda/envs/pytorch041/bin/python -m conda install -c soumith magma-cuda92
-/anaconda/envs/pytorch041/bin/conda install torchvision pytorch==0.4.1 -c pytorch
-
-## Install it as a kernel
-/anaconda/envs/pytorch041/bin/python -m ipykernel install --name pytorch_041 --display-name "Python 3.6 - PyTorch 0.4.1"
-
-echo "Done setting up PyTorch 0.4.1" >> "/home/userscript.log"
-
-#### PYTORCH 0.3.1 ####
-
-/anaconda/envs/py35/bin/conda create --name pytorch031 python=3.6 ipykernel conda numpy pyyaml scipy ipython mkl
-
-## update appropriate permissions
-chown -R ${adminUser}:${adminUser} ${condapath}
-
-# # Install PyTorch 0.3.1 into environment with cuda 9.2 support as DSVM is on this now
-/anaconda/envs/pytorch031/bin/python -m conda install -c soumith magma-cuda92
-/anaconda/envs/pytorch031/bin/conda install torchvision pytorch==0.3.1 -c pytorch
-
-## Install it as a kernel
-/anaconda/envs/pytorch031/bin/python -m ipykernel install --name pytorch_031 --display-name "Python 3.6 - PyTorch 0.3.1"
-
-echo "Done setting up PyTorch 0.3.1" >> "/home/userscript.log"
+echo "Done setting up PyTorch 1.1" >> "/home/userscript.log"
 
 ## Update appropriate permissions
 chown -R ${adminUser}:${adminUser} ${condapath}

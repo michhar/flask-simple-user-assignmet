@@ -52,5 +52,7 @@ server = "{}.westus2.cloudapp.azure.com".format(deployer.dns_label_prefix)
 scper = SCPFiles(server, 22, my_admin_user, my_user_password)
 scper.get_file(file_path='/home/{}/usersinfo.csv'.format(my_admin_user), download_path='.')
 
+# TODO: create a database of users and passwords
+
 # Destroy the resource group which contains the deployment
 # deployer.destroy()
