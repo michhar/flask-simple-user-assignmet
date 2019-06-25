@@ -12,10 +12,28 @@ echo $adminUser >> "/home/userscript.log"
 publicIP=`dig +short myip.opendns.com @resolver1.opendns.com`
 echo $publicIP >> "/home/userscript.log"
 
+# Script to update Notbook metadata
+cat << EOF > /tmp/changenbmeta.py
+#!/usr/bin/python
+import json,sys
+if len(sys.argv) < 2 :
+        print "Usage: python changenbmeta.py <filename>"
+        exit()
+with open(sys.argv[1], "r") as jsonFile:
+    data = json.load(jsonFile)
+data["metadata"]["kernelspec"]["display_name"] = "Python 3.6 - PyTorch 1.1"
+data["metadata"]["kernelspec"]["name"] = "pytorch1_1"
+with open(sys.argv[1], "w") as jsonFile:
+    json.dump(data, jsonFile)
+EOF
+
 # Clone the content
-mkdir -p /etc/skel/notebooks/workshop
-cd /etc/skel/notebooks/workshop
+mkdir -p /etc/skel/notebooks/Workshop
+cd /etc/skel/notebooks/Workshop
 git clone https://github.com/PythonWorkshop/intro-to-nlp-with-pytorch.git
+
+# Change metadata on notebook to match kernel name in the fast.ai notebooks
+find . -name \*.ipynb -exec /usr/bin/python /tmp/changenbmeta.py {} \;
 
 # Save host public ip address to the users text file
 echo $publicIP >> "/home/usersinfo.csv"
@@ -51,12 +69,12 @@ echo "Created users" >> "/home/userscript.log"
 for filename in /home/*; do
   dir=$filename/notebooks
   user=${filename:6}
-  cp -r /etc/skel/notebooks/workshop $dir
-  chown -R $user $dir/workshop/*
-  chown $user $dir/workshop
+  cp -r /etc/skel/notebooks/Workshop $dir
+  chown -R $user $dir/Workshop/*
+  chown $user $dir/Workshop
 done
 
-echo "Copied workshop notebooks into user directories" >> "/home/userscript.log"
+echo "Copied Workshop notebooks into user directories" >> "/home/userscript.log"
 
 ## now create the env...
 condapath=/home/$adminUser/.conda/envs
@@ -81,7 +99,7 @@ unzip libtorch-shared-with-deps-latest.zip
 sudo mv libtorch /usr/local/lib/python3.5/dist-packages/torch
 
 ## Install it as a kernel
-/anaconda/envs/pytorch1/bin/python -m ipykernel install --name pytorch_preview --display-name "Python 3.6 - PyTorch 1.1"
+/anaconda/envs/pytorch1/bin/python -m ipykernel install --name pytorch1_1 --display-name "Python 3.6 - PyTorch 1.1"
 
 echo "Done setting up PyTorch 1.1" >> "/home/userscript.log"
 
