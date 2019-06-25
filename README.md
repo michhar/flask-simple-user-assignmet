@@ -10,7 +10,7 @@ The final product is handy for workshops where Jupyter and a multi-user setup is
 
 ## What gets deployed
 
-* NC6 Ubuntu Data Science Virtual Machine with JupyterHub and <a href="https://pytorch.org/" target="_blank">PyTorch</a> kernels (1, 0.4.1, 0.3.1)
+* NC6 Ubuntu Data Science Virtual Machine with JupyterHub and <a href="https://pytorch.org/" target="_blank">PyTorch</a> 1.x kernel with Python 3.6
 * Azure App Service for Flask webapp
 * AAD App with a Service Principal
 
@@ -28,7 +28,7 @@ But first, here are some more details on the VM.
   * The admin and users have randomly generated passwords.  The admin password is given when running the Python deployment script.  The list for the additional users and corresponding passwords is downloaded automatically as a `csv` file after running the deployment script.
   * Each user will have a home folder with the generic notebooks that come with the VM by default - so essentially their own working environment.
 * JupyterHub is provided for multi-tenant login
-* PyTorch 1.0, 0.4.1, and 0.3.1 kernels for Jupyter are created
+* PyTorch 1.1 kernel for Jupyter is created
 
 ### Steps
 

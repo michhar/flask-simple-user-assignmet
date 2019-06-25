@@ -18,7 +18,7 @@ cd /etc/skel/notebooks/workshop
 git clone https://github.com/PythonWorkshop/intro-to-nlp-with-pytorch.git
 
 # Save host public ip address to the users text file
-echo $publicIP >> "/home/$adminUser/usersinfo.csv"
+echo $publicIP >> "/home/usersinfo.csv"
 
 ## declare an array of user names to create on vm
 declare -a arr=("temp" "storm" "jeangrey" "polaris" "captainmarvel" "quake" "spidergwen" "jessicajones" "arclight" "firestar" "rogue")
@@ -73,7 +73,7 @@ fi
 chown -R ${adminUser}:${adminUser} ${condapath}
 
 # Install PyTorch 1.x into environment with cuda 9.2 support as DSVM is on this now
-/anaconda/envs/pytorch1/bin/python -m conda install pytorch==1.1.0 torchvision cudatoolkit=9.2 -c pytorch -y
+/anaconda/envs/pytorch1/bin/python -m conda install pytorch==1.1.0 torchvision cudatoolkit=9.0 -c pytorch -y
 
 # LibTorch - install into /usr/local/lib
 wget https://download.pytorch.org/libtorch/nightly/cu92/libtorch-shared-with-deps-latest.zip
