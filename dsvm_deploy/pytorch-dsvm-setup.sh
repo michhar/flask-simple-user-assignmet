@@ -12,22 +12,10 @@ echo $adminUser >> "/home/userscript.log"
 publicIP=`dig +short myip.opendns.com @resolver1.opendns.com`
 echo $publicIP >> "/home/userscript.log"
 
-WD=/home/$adminUser/notebooks
-
 # Clone the content
 mkdir -p /etc/skel/notebooks/workshop
 cd /etc/skel/notebooks/workshop
 git clone https://github.com/PythonWorkshop/intro-to-nlp-with-pytorch.git
-
-echo WD is $WD
-
-if [ ! -d $WD ]; then
-    echo $WD "does not exist - aborting!!" >> "/home/userscript.log"
-    exit
-else
-    cd $WD
-    echo "Working in $(pwd)" >> "/home/userscript.log"
-fi
 
 # Save host public ip address to the users text file
 echo $publicIP >> "/home/$adminUser/usersinfo.csv"
@@ -42,7 +30,7 @@ do
     p=`openssl rand -hex 4`
     p="P$p!"
     printf "$p\n$p" | sudo passwd $u
-    echo $u, $p >> "/home/$adminUser/usersinfo.csv"
+    echo $u, $p >> "/home/usersinfo.csv"
 
     # add user to sudoers
     sudo adduser $u sudo
