@@ -14,8 +14,10 @@ echo $publicIP >> "/home/userscript.log"
 
 WD=/home/$adminUser/notebooks
 
-# Clone the content into admin user notebooks directory
-git clone https://github.com/PythonWorkshop/intro-to-nlp-with-pytorch.git "$WD/intro-to-nlp-with-pytorch"
+# Clone the content
+mkdir -p /etc/skel/notebooks/workshop
+cd /etc/skel/notebooks/workshop
+git clone https://github.com/PythonWorkshop/intro-to-nlp-with-pytorch.git
 
 echo WD is $WD
 
@@ -57,7 +59,16 @@ do
 done
 echo "Created users" >> "/home/userscript.log"
 
+# copy the notebooks to the users' profiles
+for filename in /home/*; do
+  dir=$filename/notebooks
+  user=${filename:6}
+  cp -r /etc/skel/notebooks/workshop $dir
+  chown -R $user $dir/workshop/*
+  chown $user $dir/workshop
+done
 
+echo "Copied workshop notebooks into user directories" >> "/home/userscript.log"
 
 ## now create the env...
 condapath=/home/$adminUser/.conda/envs
