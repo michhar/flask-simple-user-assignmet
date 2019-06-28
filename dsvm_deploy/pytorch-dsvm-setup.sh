@@ -27,13 +27,13 @@ with open(sys.argv[1], "w") as jsonFile:
     json.dump(data, jsonFile)
 EOF
 
-# Clone the content
-mkdir -p /etc/skel/notebooks/Workshop
-cd /etc/skel/notebooks/Workshop
-git clone https://github.com/PythonWorkshop/intro-to-nlp-with-pytorch.git
+# # Clone the content
+# mkdir -p /etc/skel/notebooks/Workshop
+# cd /etc/skel/notebooks/Workshop
+# git clone https://github.com/PythonWorkshop/intro-to-nlp-with-pytorch.git
 
-# Change metadata on notebook to match kernel name in the fast.ai notebooks
-find . -name \*.ipynb -exec /usr/bin/python /tmp/changenbmeta.py {} \;
+# # Change metadata on notebook to match kernel name in the fast.ai notebooks
+# find . -name \*.ipynb -exec /usr/bin/python /tmp/changenbmeta.py {} \;
 
 # Save host public ip address to the users text file
 echo $publicIP >> "/home/usersinfo.csv"
