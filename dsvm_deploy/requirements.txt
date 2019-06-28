@@ -1,0 +1,9 @@
+bs4
+jdc
+jupyter
+numpy
+requests
+scipy
+sklearn
+torchvision==0.2.2.post3
+tqdm
