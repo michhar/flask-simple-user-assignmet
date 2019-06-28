@@ -27,13 +27,13 @@ with open(sys.argv[1], "w") as jsonFile:
     json.dump(data, jsonFile)
 EOF
 
-# # Clone the content
-# mkdir -p /etc/skel/notebooks/Workshop
-# cd /etc/skel/notebooks/Workshop
-# git clone https://github.com/PythonWorkshop/intro-to-nlp-with-pytorch.git
+# Clone the content
+mkdir -p /etc/skel/notebooks/Workshop
+cd /etc/skel/notebooks/Workshop
+git clone https://github.com/PythonWorkshop/intro-to-nlp-with-pytorch.git
 
-# # Change metadata on notebook to match kernel name in the fast.ai notebooks
-# find . -name \*.ipynb -exec /usr/bin/python /tmp/changenbmeta.py {} \;
+# Change metadata on notebook to match kernel name in the fast.ai notebooks
+find . -name \*.ipynb -exec /usr/bin/python /tmp/changenbmeta.py {} \;
 
 # Save host public ip address to the users text file
 echo $publicIP >> "/home/usersinfo.csv"
@@ -92,7 +92,8 @@ chown -R ${adminUser}:${adminUser} ${condapath}
 
 # Install PyTorch 1.x into environment with cuda 9.2 support as DSVM is on this now
 /anaconda/envs/pytorch1/bin/python -m conda install pytorch==1.1.0 torchvision cudatoolkit=9.0 -c pytorch -y
-/anaconda/envs/pytorch1/bin/python -m pip install -r requirements.txt
+/anaconda/envs/pytorch1/bin/python -m pip install --yes bs4 jdc jupyter numpy requests scipy sklearn tqdm
+
 # LibTorch - install into /usr/local/lib
 wget https://download.pytorch.org/libtorch/nightly/cu92/libtorch-shared-with-deps-latest.zip
 unzip libtorch-shared-with-deps-latest.zip
