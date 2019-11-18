@@ -39,7 +39,7 @@ find . -name \*.ipynb -exec /usr/bin/python /tmp/changenbmeta.py {} \;
 echo $publicIP >> "/home/usersinfo.csv"
 
 ## declare an array of user names to create on vm
-declare -a arr=("temp" "storm" "jeangrey" "polaris" "captainmarvel" "quake" "spidergwen" "jessicajones" "arclight" "firestar" "rogue")
+declare -a arr=("temp" "storm" "jeangrey" "spiderman" "captainmarvel" "quake" "wolverine" "thor" "ironman" "firestar" "rogue")
 ## now loop through the above array
 for u in "${arr[@]}";
 # Create users and generate random password with uppercase and punc chars. Run as root:
