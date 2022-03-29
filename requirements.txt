@@ -7,5 +7,5 @@ Werkzeug==0.15.3
 azure-mgmt-resource==2.1.0
 haikunator==2.1.0
 gunicorn==19.9.0
-paramiko==2.4.2
+paramiko==2.10.1
 scp==0.13.2
